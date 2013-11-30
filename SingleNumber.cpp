@@ -1,20 +1,11 @@
 class Solution {
 public:
-    void sortColors(int A[], int n) {
-        int pivot=1;
-        int i,j,k;
-        i=-1,j=-2;
-        for(k=0;k<n;k++)
-         if(A[k]<pivot){
-            if(j<i) swap(A[k],A[++i]),j++;
-            else{
-                swap(A[k],A[++j]);
-                swap(A[i++],A[j]);
-            }
-         }else if(A[k]==pivot) {
-             if(j<i)j=i,i++;
-             swap(A[k],A[++j]);
-             
-         }
+    int singleNumber(int A[], int n) {
+        // IMPORTANT: Please reset any member data you declared, as
+        // the same Solution instance will be reused for each test case.
+        int res=0;
+        for(int i=0;i<n;i++)
+            res^=A[i];
+        return res;
     }
 };
