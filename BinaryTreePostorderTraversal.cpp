@@ -1,20 +1,40 @@
+/**
+ * Definition for binary tree
+ * struct TreeNode {
+ *     int val;
+ *     TreeNode *left;
+ *     TreeNode *right;
+ *     TreeNode(int x) : val(x), left(NULL), right(NULL) {}
+ * };
+ */
+struct Node{
+    TreeNode *t;
+    bool expanded;
+    Node(TreeNode *_t,bool b){
+        t=_t;
+        expanded=b;
+    }
+};
 class Solution {
 public:
-    void sortColors(int A[], int n) {
-        int pivot=1;
-        int i,j,k;
-        i=-1,j=-2;
-        for(k=0;k<n;k++)
-         if(A[k]<pivot){
-            if(j<i) swap(A[k],A[++i]),j++;
-            else{
-                swap(A[k],A[++j]);
-                swap(A[i++],A[j]);
+    vector<int> postorderTraversal(TreeNode *root) {
+        // IMPORTANT: Please reset any member data you declared, as
+        // the same Solution instance will be reused for each test case.
+        vector<int> ans;
+        stack<Node> st;
+        st.push(Node(root,false));
+        Node node(root,false);
+        if (!root) return ans;
+        while(!st.empty()){
+            node = st.top();
+            if(node.expanded) ans.push_back(node.t->val),st.pop();
+            else {
+                 st.top().expanded=true;
+                 if(node.t->right) st.push(Node(node.t->right,false));
+                 if(node.t->left) st.push(Node(node.t->left,false));
             }
-         }else if(A[k]==pivot) {
-             if(j<i)j=i,i++;
-             swap(A[k],A[++j]);
-             
-         }
+            
+        }
+        return ans;
     }
 };
