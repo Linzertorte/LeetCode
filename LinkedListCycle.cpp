@@ -1,20 +1,31 @@
+/**
+ * Definition for singly-linked list.
+ * struct ListNode {
+ *     int val;
+ *     ListNode *next;
+ *     ListNode(int x) : val(x), next(NULL) {}
+ * };
+ */
 class Solution {
 public:
-    void sortColors(int A[], int n) {
-        int pivot=1;
-        int i,j,k;
-        i=-1,j=-2;
-        for(k=0;k<n;k++)
-         if(A[k]<pivot){
-            if(j<i) swap(A[k],A[++i]),j++;
-            else{
-                swap(A[k],A[++j]);
-                swap(A[i++],A[j]);
-            }
-         }else if(A[k]==pivot) {
-             if(j<i)j=i,i++;
-             swap(A[k],A[++j]);
-             
-         }
+    bool hasCycle(ListNode *head) {
+        // IMPORTANT: Please reset any member data you declared, as
+        // the same Solution instance will be reused for each test case.
+        if(!head) return false;
+        ListNode *p1,*p2;
+        p1=head;
+        p2=head;
+        p2=p2->next;
+        if(!p2) return false;
+        p2=p2->next;
+        while(p1&&p2)
+        {
+            if(p1==p2) return true;
+            p1=p1->next;
+            p2=p2->next;
+            if(!p2) return false;
+            p2=p2->next;
+        }
+        return false;
     }
 };
