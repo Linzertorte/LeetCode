@@ -1,20 +1,15 @@
 class Solution {
 public:
-    void sortColors(int A[], int n) {
-        int pivot=1;
-        int i,j,k;
-        i=-1,j=-2;
-        for(k=0;k<n;k++)
-         if(A[k]<pivot){
-            if(j<i) swap(A[k],A[++i]),j++;
-            else{
-                swap(A[k],A[++j]);
-                swap(A[i++],A[j]);
-            }
-         }else if(A[k]==pivot) {
-             if(j<i)j=i,i++;
-             swap(A[k],A[++j]);
-             
-         }
+    int minimumTotal(vector<vector<int> > &triangle) {
+        // IMPORTANT: Please reset any member data you declared, as
+        // the same Solution instance will be reused for each test case.
+        int n=triangle.size();
+        if(!n) return 0;
+        vector<vector<int> > dp=triangle;
+        for(int i=n-2;i>=0;i--){
+            for(int j=0;j<i+1;j++) dp[i][j]=triangle[i][j]+min(dp[i+1][j],dp[i+1][j+1]);
+        }
+        
+        return dp[0][0];
     }
 };
