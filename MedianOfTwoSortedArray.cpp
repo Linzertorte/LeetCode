@@ -10,10 +10,10 @@ public:
 	
         if (n <= 0) return b[k-1];
         if (m <= 0) return a[k-1];
-
+	//get rid half+1, so finally, one of the array will be ruled out.
         if (b[m/2] >= a[n/2])
         {
-            if ((n/2 + 1 + m/2) >= k)
+            if ((n/2 + 1 + m/2) >= k) //this is the trick.
                 return GetMedian(a, n, b, m/2, k);
             else
                 return GetMedian(a + n/2 + 1, n - (n/2 + 1), b, m, k - (n/2 + 1));
