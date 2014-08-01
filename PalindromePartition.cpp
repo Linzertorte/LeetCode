@@ -1,6 +1,7 @@
 class Solution {
 public:
-    void dfs(int i,int n,const string &s,const vector<vector<int> > &dp, vector<string> &path, vector<vector<string> > &result){
+    void dfs(int i,int n,const string &s,const vector<vector<int> > &dp, vector<string> &path, 
+    vector<vector<string> > &result){
         if(i==n){
             result.push_back(path);
             return;
