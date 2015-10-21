@@ -1,24 +1,17 @@
 class Solution {
 public:
-    vector<vector<int> > subsets(vector<int> &S) {
-        // IMPORTANT: Please reset any member data you declared, as
-        // the same Solution instance will be reused for each test case.
-        int n=S.size();
-        vector<vector<int> > result;
-        sort(S.begin(),S.end());
-        for(int x=0;x<(1<<n);x++){
-            vector<int> now;
-            int bits=x;
-            int i=0;
-            while(bits){
-                if(bits%2) now.push_back(S[i]);
-                i++;
-                bits/=2;
+    vector<vector<int>> subsets(vector<int>& nums) {
+        vector<vector<int>> vs;
+        if(nums.size()==0) return vs;
+        vs.push_back(vector<int>());
+        sort(nums.begin(),nums.end());
+        for(auto x:nums){
+            size_t len = vs.size();
+            for(int i=0;i<len;i++){
+                vector<int> p = vs[i];
+                p.push_back(x), vs.push_back(p);
             }
-            
-            result.push_back(now);
         }
-        
-        return result;
+        return vs;
     }
 };
